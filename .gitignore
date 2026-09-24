@@ -10,10 +10,13 @@
 평가문항.md
 CLAUDE.md
 WORKLOG.md
+이해plus.md
+Infographic of AWS Cloud as a Building Analogy.png
 
 # 시크릿 (작업규칙 §6) — .env.example은 커밋해야 하므로 제외하지 않는다
 .env
 .env.local
+*.pem
 
 # OS · 에디터 부산물
 .DS_Store
