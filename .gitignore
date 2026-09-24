@@ -1,8 +1,4 @@
-# 미션 repo .gitignore 템플릿
-# 시작 루틴이 미션 폴더에 `.gitignore`로 복사한다.
-# 언어별 블록은 해당 미션에 맞는 것만 남기고 나머지는 지운다.
-
-# 진행 문서 — Drive에만 두고 GitHub에는 올리지 않는다 (repo가 공개라서)
+# 진행 문서 — Drive에만 두고 GitHub에는 올리지 않는다
 요구사항_*.md
 이해_*.md
 평가준비_*.md
@@ -13,7 +9,7 @@ WORKLOG.md
 이해plus.md
 Infographic of AWS Cloud as a Building Analogy.png
 
-# 시크릿 (작업규칙 §6) — .env.example은 커밋해야 하므로 제외하지 않는다
+# 시크릿
 .env
 .env.local
 *.pem
