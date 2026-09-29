@@ -25,12 +25,14 @@ Nginx 설치만으로 페이지가 나오므로 별도 `/health` 엔드포인트
 
 | 리소스 | 값 | 선택 이유 |
 | --- | --- | --- |
-| 접근 계정 | IAM 사용자 (`AmazonEC2FullAccess`만 연결) | 루트 계정 미사용. `AdministratorAccess`보다 훨씬 좁은 관리형 정책으로 실수 없이 설정. 다만 EC2·VPC 외에 ELB·Auto Scaling·CloudWatch 권한도 포함해, 필요한 작업만 고른 커스텀 정책보다는 넓음 |
+| 접근 계정 | IAM 사용자 (`AmazonEC2FullAccess`만 연결) | 루트 계정 미사용. `AdministratorAccess`보다 훨씬 좁은 관리형 정책으로 실수 없이 설정. 다만 EC2·VPC 외에 ELB·Auto Scaling·CloudWatch 권한도 포함해, 필요한 작업만 고른 커스텀 정책보다는 넓음. 실제 사용 범위가 드러나면 AccessDenied 메시지·CloudTrail 호출 이력으로 필요한 action만 골라 커스텀 정책으로 교체 |
 | VPC / Subnet | `10.0.0.0/16` / Public `10.0.1.0/24` (퍼블릭 IP 자동 할당) | 인스턴스가 공인 IP를 받아 외부에서 접근 가능 |
 | 라우팅 | IGW를 VPC에 연결, Route Table에 `0.0.0.0/0 → IGW` | 이 경로가 있어야 Subnet이 인터넷과 통신 |
-| 보안 그룹 `b3-1-web-sg` | 인바운드 HTTP 80 `0.0.0.0/0`, SSH 22 내 IP(`/32`)만 | 필요한 포트만 허용, 전체 포트 개방 규칙 없음. 내 IP는 콘솔 "My IP" 자동 입력 사용 |
+| 보안 그룹 `b3-1-web-sg` | 인바운드 HTTP 80 `0.0.0.0/0`, SSH 22 내 IP(`/32`)만 | 필요한 포트만 허용, 전체 포트 개방 규칙 없음. 내 IP는 콘솔 "My IP" 자동 입력 사용. 22를 `0.0.0.0/0`로 열면 전 세계 스캐너의 무차별 대입 대상이 되므로 `/32`로 제한. 대안은 고정 CIDR 목록이나 22를 닫고 SSM Session Manager 사용 |
 | EC2 `b3-1-web` | Ubuntu 26.04 LTS · `t3.micro` · EBS 8GiB | Ubuntu는 자료가 많고 `apt` 설치가 간단, `t3.micro`는 서울 리전 프리티어 포함 |
 | 웹 서버 | Nginx (`apt install`) | 설치만으로 응답 페이지 제공 |
+
+리소스 추적 기준: 모든 리소스에 `Name` 태그를 `b3-1-<역할>`(`b3-1-vpc`·`b3-1-public-subnet`·`b3-1-igw`·`b3-1-web`·`b3-1-web-sg`)로 붙여 콘솔에서 이름으로 찾고, 정리는 [체크리스트](docs/cleanup-checklist.md)로 확인했습니다.
 
 ## 검증 방법
 
