@@ -25,11 +25,11 @@ Nginx 설치만으로 페이지가 나오므로 별도 `/health` 엔드포인트
 
 | 리소스 | 값 | 선택 이유 |
 | --- | --- | --- |
-| 접근 계정 | IAM 사용자 (`AmazonEC2FullAccess`만 연결) | 루트 계정 미사용. `AdministratorAccess`보다 훨씬 좁은 관리형 정책으로 실수 없이 설정 |
+| 접근 계정 | IAM 사용자 (`AmazonEC2FullAccess`만 연결) | 루트 계정 미사용. `AdministratorAccess`보다 훨씬 좁은 관리형 정책으로 실수 없이 설정. 다만 EC2·VPC 외에 ELB·Auto Scaling·CloudWatch 권한도 포함해, 필요한 작업만 고른 커스텀 정책보다는 넓음 |
 | VPC / Subnet | `10.0.0.0/16` / Public `10.0.1.0/24` (퍼블릭 IP 자동 할당) | 인스턴스가 공인 IP를 받아 외부에서 접근 가능 |
 | 라우팅 | IGW를 VPC에 연결, Route Table에 `0.0.0.0/0 → IGW` | 이 경로가 있어야 Subnet이 인터넷과 통신 |
 | 보안 그룹 `b3-1-web-sg` | 인바운드 HTTP 80 `0.0.0.0/0`, SSH 22 내 IP(`/32`)만 | 필요한 포트만 허용, 전체 포트 개방 규칙 없음. 내 IP는 콘솔 "My IP" 자동 입력 사용 |
-| EC2 `b3-1-web` | Ubuntu 24.04 · `t3.micro` · EBS 8GiB | Ubuntu는 자료가 많고 `apt` 설치가 간단, `t3.micro`는 서울 리전 프리티어 포함 |
+| EC2 `b3-1-web` | Ubuntu 26.04 LTS · `t3.micro` · EBS 8GiB | Ubuntu는 자료가 많고 `apt` 설치가 간단, `t3.micro`는 서울 리전 프리티어 포함 |
 | 웹 서버 | Nginx (`apt install`) | 설치만으로 응답 페이지 제공 |
 
 ## 검증 방법

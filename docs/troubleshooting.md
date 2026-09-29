@@ -6,7 +6,7 @@
 | --- | --- |
 | 증상 | `http://13.125.115.4` 접속 시 응답 없이 연결 시간 초과. `curl -m 5`도 timeout (`step_6_02_timeout.png`) |
 | 원인 가설 | ① Nginx가 죽었다 ② 인바운드 80 포트가 보안 그룹에서 막혔다 ③ 라우팅(IGW 경로) 문제 |
-| 검증 방법 | EC2 내부에서 `systemctl is-active nginx` = `active`, `curl -I localhost` = 200 → 서버는 정상, 가설 ①은 기각 (`step_6_03_server_ok.png`). 라우트 테이블 `0.0.0.0/0 → IGW`는 2단계에서 확인 완료라 ③ 기각. 인바운드 규칙에 80이 없음 확인 (`step_6_01_sg_http_removed.png`) → ② 확정 |
+| 검증 방법 | EC2 내부에서 `systemctl is-active nginx` = `active`, `curl -I localhost` = 200 → 서버는 정상, 가설 ①은 기각 (`step_6_03_server_ok.png`). 네트워크 구성 때 확인한 Route Table `0.0.0.0/0 → IGW`가 정상이라(`step2_routetable.png`) ③ 기각. 인바운드 규칙에 80이 없음 확인 (`step_6_01_sg_http_removed.png`) → ② 확정 |
 | 조치 내용 | `b3-1-web-sg`에 `HTTP 80 / 0.0.0.0/0` 인바운드 규칙 추가 |
 | 결과 | 브라우저에서 Nginx 기본 페이지 정상 표시 (`step_6_04_recovered.png`) |
 | 재발 방지 | 배포 체크리스트에 "SG 인바운드 80 확인"을 넣고, 접속 불가 시 서버 내부 curl → SG → 라우팅 순으로 좁혀 간다 |
