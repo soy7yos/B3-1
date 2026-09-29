@@ -8,3 +8,4 @@
 
 ![외부 접속 결과](docs/captures/step5_browser_access.png)
 ![인스턴스 퍼블릭 IP](docs/captures/step5_ec2_publicip.png)
+![아키텍처](docs/architecture.png)
