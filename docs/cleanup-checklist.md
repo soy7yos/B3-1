@@ -6,13 +6,13 @@
 
 | 완료 | 리소스 | 확인 위치 | 근거 |
 | --- | --- | --- | --- |
-| [ ] | EC2 `b3-1-web` — 종료됨(Terminated) | EC2 → 인스턴스 | `step_8_01_ec2_terminated.png` |
-| [ ] | EBS 볼륨(8GiB, 미사용 포함) — 목록 비어 있음 | EC2 → 볼륨 | `step_8_02_ebs_empty.png` |
-| [ ] | Elastic IP — 할당한 적 없음(퍼블릭 IP는 서브넷 자동 할당), 목록 비어 있음 | EC2 → 탄력적 IP | `step_8_03_eip_empty.png` |
-| [ ] | Security Group `b3-1-web-sg` — 삭제 | EC2 → 보안 그룹 | (VPC 삭제 성공으로 갈음) |
-| [ ] | Subnet `10.0.1.0/24`, Route Table — 삭제 | VPC → 서브넷·라우팅 테이블 | (VPC 삭제 성공으로 갈음) |
-| [ ] | Internet Gateway — VPC에서 분리 후 삭제 | VPC → 인터넷 게이트웨이 | `step_8_04_igw_deleted.png` |
-| [ ] | VPC `10.0.0.0/16` — 삭제 | VPC → VPC | `step_8_05_vpc_deleted.png` |
+| [x] | EC2 `b3-1-web` — 종료됨(Terminated) | EC2 → 인스턴스 | `step_8_01_ec2_terminated.png` |
+| [x] | EBS 볼륨(8GiB, 미사용 포함) — 목록 비어 있음 | EC2 → 볼륨 | `step_8_02_ebs_empty.png` |
+| [x] | Elastic IP — 할당한 적 없음(퍼블릭 IP는 서브넷 자동 할당), 목록 비어 있음 | EC2 → 탄력적 IP | `step_8_03_eip_empty.png` |
+| [x] | Security Group `b3-1-web-sg` — 삭제 | EC2 → 보안 그룹 | (VPC 삭제 성공으로 갈음) |
+| [x] | Subnet `10.0.1.0/24`, Route Table — 삭제 | VPC → 서브넷·라우팅 테이블 | (VPC 삭제 성공으로 갈음) |
+| [x] | Internet Gateway — VPC에서 분리 후 삭제 | VPC → 인터넷 게이트웨이 | `step_8_04_igw_deleted.png` |
+| [x] | VPC `10.0.0.0/16` — 삭제 | VPC → VPC | `step_8_05_vpc_deleted.png` |
 | — | NAT Gateway · ELB/ALB · RDS | — | 생성하지 않아 해당 없음 |
 | — | 키페어 · IAM 사용자 | — | 과금 없음, 유지 |
 
